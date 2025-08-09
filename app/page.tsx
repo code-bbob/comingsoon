@@ -31,7 +31,6 @@ export default function ComingSoon() {
   if (!canvas) return;
   let ctx = canvas.getContext("2d");
   if (!ctx) return;
-    let frame = 0;
     const DPR = window.devicePixelRatio || 1;
     function resize() {
       if (!canvas) return;
@@ -56,7 +55,6 @@ export default function ComingSoon() {
     }));
     function draw() {
       if (!canvas || !ctx) return;
-      frame++;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.save();
       ctx.globalCompositeOperation = "lighter";
@@ -174,7 +172,7 @@ export default function ComingSoon() {
         )}
         {status === "success" && (
           <p className="text-xs text-accent font-medium">
-            You're in. We'll share fabric stories & first release dates soon.
+            You&apos;re in. We&apos;ll share fabric stories &amp; first release dates soon.
           </p>
         )}
 
