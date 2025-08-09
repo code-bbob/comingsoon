@@ -110,10 +110,10 @@ export default function ComingSoon() {
       <div className="w-full max-w-6xl mx-auto flex flex-col items-center gap-12">
         <header className="flex flex-col items-center text-center gap-6 max-w-3xl mx-auto">
           <div className="flex flex-col items-center gap-4">
-            <h1 className="gradient-text font-extrabold tracking-tight text-[clamp(2.8rem,6.5vw,5.8rem)] leading-[0.95] drop-shadow-sm text-center">
+            <h1 className="gradient-text font-extrabold tracking-tight text-[clamp(2.8rem,6.5vw,5.8rem)] leading-[1.58] drop-shadow-sm text-center">
               आमाको नाना
             </h1>
-            <h2 className="font-semibold text-[clamp(1.35rem,3.2vw,2.35rem)] leading-tight text-center bg-gradient-to-r from-purple-600 via-fuchsia-500 to-sky-500 bg-clip-text text-transparent">
+            <h2 className="font-semibold pt-2 text-[clamp(1.35rem,3.2vw,2.35rem)] leading-tight text-center bg-gradient-to-r from-purple-600 via-fuchsia-500 to-sky-500 bg-clip-text text-transparent">
               आमाको न्यानोपनको अनुभूति
             </h2>
           </div>
