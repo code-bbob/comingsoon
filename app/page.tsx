@@ -111,13 +111,13 @@ export default function ComingSoon() {
         <header className="flex flex-col items-center text-center gap-6 max-w-3xl mx-auto">
           <div className="flex flex-col items-center gap-4">
             <h1 className="gradient-text font-extrabold tracking-tight text-[clamp(2.8rem,6.5vw,5.8rem)] leading-[0.95] drop-shadow-sm text-center">
-              Aama Ko Nana
+              आमाको नाना
             </h1>
             <h2 className="font-semibold text-[clamp(1.35rem,3.2vw,2.35rem)] leading-tight text-center bg-gradient-to-r from-purple-600 via-fuchsia-500 to-sky-500 bg-clip-text text-transparent">
               आमाको न्यानोपनको अनुभूति
             </h2>
           </div>
-          <p className="text-sm md:text-base leading-relaxed text-foreground/70 max-w-xl font-medium text-center md:text-left">
+          <p className="text-sm md:text-base leading-relaxed text-soft max-w-xl font-medium text-center md:text-left">
             A bold creative & commerce space blending narrative, motion, and refined interaction. Be first when we drop.
           </p>
         </header>
@@ -197,10 +197,10 @@ export default function ComingSoon() {
               key={card.title}
               className="glass rounded-2xl p-6 flex flex-col gap-3 relative overflow-hidden"
             >
-              <h3 className="font-semibold text-base leading-tight">
+              <h3 className="font-semibold text-base leading-tight text-foreground">
                 {card.title}
               </h3>
-              <p className="text-sm text-foreground/70 leading-relaxed">
+              <p className="text-sm text-muted leading-relaxed">
                 {card.body}
               </p>
             </article>
