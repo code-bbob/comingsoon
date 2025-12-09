@@ -20,12 +20,11 @@ function getTimeLeft(): TimeLeft {
 }
 
 export default function ComingSoon() {
-  const [time, setTime] = useState<TimeLeft>(getTimeLeft());
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
-  // Animated halo / particle background using canvas for subtle motion
+  // Soft ambient halo background (subtle, no counters)
   useEffect(() => {
   const canvas = canvasRef.current;
   if (!canvas) return;
@@ -45,13 +44,13 @@ export default function ComingSoon() {
     }
     resize();
     window.addEventListener("resize", resize);
-    const particles = Array.from({ length: 60 }, () => ({
+    const particles = Array.from({ length: 40 }, () => ({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
       r: 0.6 + Math.random() * 2.2,
       dx: -0.3 + Math.random() * 0.6,
       dy: -0.3 + Math.random() * 0.6,
-      hue: Math.random() > 0.5 ? 270 : 200,
+      hue: Math.random() > 0.5 ? 40 : 150,
     }));
     function draw() {
       if (!canvas || !ctx) return;
@@ -65,9 +64,9 @@ export default function ComingSoon() {
         if (p.x < -50) p.x = window.innerWidth + 50; else if (p.x > window.innerWidth + 50) p.x = -50;
         if (p.y < -50) p.y = window.innerHeight + 50; else if (p.y > window.innerHeight + 50) p.y = -50;
         const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 18);
-        g.addColorStop(0, `hsla(${p.hue} 90% 60% / 0.9)`);
-        g.addColorStop(0.35, `hsla(${p.hue} 90% 60% / 0.35)`);
-        g.addColorStop(1, `hsla(${p.hue} 90% 55% / 0)`);
+        g.addColorStop(0, `hsla(${p.hue} 55% 60% / 0.85)`);
+        g.addColorStop(0.35, `hsla(${p.hue} 45% 60% / 0.32)`);
+        g.addColorStop(1, `hsla(${p.hue} 45% 55% / 0)`);
         ctx.fillStyle = g;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r * 18, 0, Math.PI * 2);
@@ -78,12 +77,6 @@ export default function ComingSoon() {
     }
     draw();
     return () => window.removeEventListener("resize", resize);
-  }, []);
-
-  // Countdown interval
-  useEffect(() => {
-    const id = setInterval(() => setTime(getTimeLeft()), 1000);
-    return () => clearInterval(id);
   }, []);
 
   function handleSubmit(e: React.FormEvent) {
@@ -99,51 +92,28 @@ export default function ComingSoon() {
     }, 1200);
   }
 
-  const launchSoon = Object.values(time).every(v => v === 0);
-
   return (
-    <main id="main" className="relative flex flex-col min-h-screen items-center justify-center px-6 py-10 md:py-20">
-      <canvas ref={canvasRef} className="pointer-events-none fixed inset-0 opacity-[0.55]" />
-      <div className="noise" />
-      <div className="w-full max-w-6xl mx-auto flex flex-col items-center gap-12">
-        <header className="flex flex-col items-center text-center gap-6 max-w-3xl mx-auto">
-          <div className="flex flex-col items-center gap-4">
-            <h1 className="gradient-text font-extrabold tracking-tight text-[clamp(2.8rem,6.5vw,5.8rem)] leading-[1.58] drop-shadow-sm text-center">
-              आमाको नाना
-            </h1>
-            <h2 className="font-semibold pt-2 text-[clamp(1.35rem,3.2vw,2.35rem)] leading-tight text-center bg-gradient-to-r from-purple-600 via-fuchsia-500 to-sky-500 bg-clip-text text-transparent">
-              आमाको न्यानोपनको अनुभूति
-            </h2>
+    <div>
+      <section className="hero">
+        <div className="hero-bg" />
+        <div className="container hero-content">
+          <div>
+            <span className="eyebrow">For moms & newborns</span>
+            <h1 className="headline text-foreground">Gentle essentials, crafted to last</h1>
+            <p className="subhead text-soft">Soft, breathable fabrics and thoughtful silhouettes—made for comfort, care, and everyday elegance. Sign up for first access.</p>
+            <div className="cta-row">
+              <a href="#newsletter" className="btn btn-primary"><span className="dot" />Get Early Access</a>
+              <a href="#featured" className="btn btn-secondary text-foreground">Explore Preview</a>
+            </div>
           </div>
-          <p className="text-sm md:text-base leading-relaxed text-soft max-w-xl font-medium text-center md:text-left">
-            A bold creative & commerce space blending narrative, motion, and refined interaction. Be first when we drop.
-          </p>
-        </header>
-
-        <section aria-label="Countdown" className="stagger w-full flex flex-col items-center gap-8">
-          <div className="count-grid">
-            {([
-              { label: "Days", value: time.days },
-              { label: "Hours", value: time.hours },
-              { label: "Minutes", value: time.minutes },
-              { label: "Seconds", value: time.seconds },
-            ] as const).map(block => (
-              <div key={block.label} className="count-cell">
-                <div className="count-value tabular-nums" aria-live="polite" aria-label={block.label}>
-                  {String(block.value).padStart(2, "0")}
-                </div>
-                <div className="count-label">{block.label}</div>
-              </div>
-            ))}
+          <div className="glass rounded-2xl p-6 fade-in">
+            <canvas ref={canvasRef} className="pointer-events-none w-full h-[260px] md:h-[340px]" />
           </div>
-          {launchSoon && (
-            <p className="text-xs uppercase tracking-[0.25em] text-warn/80">
-              Launch Imminent
-            </p>
-          )}
-        </section>
+        </div>
+      </section>
 
-        <form onSubmit={handleSubmit} className="subscribe-form stagger" noValidate>
+      <section id="newsletter" className="container stack-tight fade-in" aria-label="Newsletter">
+        <form onSubmit={handleSubmit} className="subscribe-form" noValidate>
           <input
             type="email"
             inputMode="email"
@@ -152,11 +122,11 @@ export default function ComingSoon() {
             aria-label="Email address"
             value={email}
             onChange={e => { setEmail(e.target.value); setStatus("idle"); }}
-            className="focus-ring"
+            className="focus-ring text-foreground"
           />
           <button
             type="submit"
-            className="btn-primary focus-ring min-w-[120px] flex justify-center"
+            className="btn-primary focus-ring min-w-[140px] flex justify-center"
             disabled={status === "loading" || status === "success"}
           >
             {status === "idle" && "Notify Me"}
@@ -166,54 +136,33 @@ export default function ComingSoon() {
           </button>
         </form>
         {status === "error" && (
-          <p className="text-xs text-warn/90 font-medium">
-            Please enter a valid email.
-          </p>
+          <p className="text-xs text-warn/90 font-medium">Please enter a valid email.</p>
         )}
         {status === "success" && (
-          <p className="text-xs text-accent font-medium">
-            You&apos;re in. We&apos;ll share fabric stories &amp; first release dates soon.
-          </p>
+          <p className="text-xs text-accent font-medium">You&apos;re in. We&apos;ll share fabric stories &amp; first release dates soon.</p>
         )}
+      </section>
 
-        <div className="grid md:grid-cols-3 gap-6 w-full max-w-5xl mt-4">
-          {[
-            {
-              title: "Natural Comfort",
-              body: "Plush, breathable fabrics chosen for delicate skin & long cuddle days—engineered for durability, pre-washed softness.",
-            },
-            {
-              title: "Responsible Craft",
-              body: "Small-batch Nepali production supporting skilled artisans, transparent sourcing & mindful waste reduction.",
-            },
-            {
-              title: "Elevated Essentials",
-              body: "Modular silhouettes that layer, launder & last—quiet design language that grows with your rhythm.",
-            },
-          ].map(card => (
-            <article
-              key={card.title}
-              className="glass rounded-2xl p-6 flex flex-col gap-3 relative overflow-hidden"
-            >
-              <h3 className="font-semibold text-base leading-tight text-foreground">
-                {card.title}
-              </h3>
-              <p className="text-sm text-muted leading-relaxed">
-                {card.body}
-              </p>
-            </article>
-          ))}
-        </div>
+        <section id="story" className="container fade-in" aria-label="Our Story" style={{padding:"3rem 0"}}>
+          <div className="glass rounded-2xl p-6" style={{display:"grid", gap:"1rem"}}>
+            <h3 className="card-title text-foreground">A gentle start</h3>
+            <p className="card-desc text-muted">Born in Nepal, crafted in small batches. We design essentials for moms and newborns with care-first materials and timeless silhouettes.</p>
+          </div>
+        </section>
 
-        <footer className="pt-10 pb-4 text-xs text-foreground/50 flex flex-col items-center gap-2">
-          <p>&copy; {new Date().getFullYear()} Aama Ko Nana. All rights reserved.</p>
-          <p className="flex gap-3">
-            <a href="#" className="hover:text-foreground/90 transition-colors">Twitter</a>
-            <a href="#" className="hover:text-foreground/90 transition-colors">LinkedIn</a>
-            <a href="#" className="hover:text-foreground/90 transition-colors">Dribbble</a>
-          </p>
-        </footer>
-      </div>
-    </main>
+        <section id="materials" className="container fade-in" aria-label="Materials" style={{padding:"1rem 0"}}>
+          <div className="glass rounded-2xl p-6" style={{display:"grid", gap:"1rem"}}>
+            <h3 className="card-title text-foreground">Materials that breathe</h3>
+            <p className="card-desc text-muted">Soft cottons, gentle blends, and washable comfort. Pre-washed for immediate softness and made to last through everyday care.</p>
+          </div>
+        </section>
+
+        <section id="care" className="container fade-in" aria-label="Care" style={{padding:"1rem 0 3rem"}}>
+          <div className="glass rounded-2xl p-6" style={{display:"grid", gap:"1rem"}}>
+            <h3 className="card-title text-foreground">Care made simple</h3>
+            <p className="card-desc text-muted">Machine-washable essentials designed to hold shape and softness. Your routine stays easy, your comfort stays premium.</p>
+          </div>
+        </section>
+    </div>
   );
 }
