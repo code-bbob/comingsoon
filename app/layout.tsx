@@ -57,43 +57,43 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full scroll-smooth" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-full bg-background text-foreground selection:bg-foreground selection:text-background`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-full bg-[var(--background)] text-[color:var(--foreground)] selection:bg-[var(--foreground)] selection:text-[var(--background)]`}
       >
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:bg-background/90 focus:backdrop-blur-sm focus:px-4 focus:py-2 focus:rounded-md focus:border focus:border-foreground/20"
-        >
-          Skip to content
-        </a>
-        <header className="sticky top-0 z-50 nav-glass">
+
+        <header className="sticky top-0 z-50 bg-[rgba(201,164,107,0.18)]  backdrop-blur-sm backdrop-saturate-50 border-b border-[color:var(--line-color)] ">
           <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-2 font-semibold tracking-tight">
-              <span className="brand-dot" />
-              <span className="text-foreground">Aama Ko Nana</span>
+              <span className="inline-block w-3 h-3 rounded-full bg-[var(--accent)] shadow-[0_0_0_6px_hsl(var(--accent-rgb)/0.2)]" />
+              <span className="text-lg text-[color:var(--foreground)]">Aama Ko Nana</span>
             </div>
             <nav className="hidden md:flex items-center gap-5" aria-label="Primary">
-              <a className="text-muted hover:text-foreground transition-colors" href="#story">Story</a>
-              <a className="text-muted hover:text-foreground transition-colors" href="#materials">Materials</a>
-              <a className="text-muted hover:text-foreground transition-colors" href="#care">Care</a>
-              <a className="text-muted hover:text-foreground transition-colors" href="#newsletter">Updates</a>
+              <a className="text-[color:var(--muted)] hover:text-[color:var(--foreground)] transition-colors" href="#story">Story</a>
+              <a className="text-[color:var(--muted)] hover:text-[color:var(--foreground)] transition-colors" href="#materials">Materials</a>
+              <a className="text-[color:var(--muted)] hover:text-[color:var(--foreground)] transition-colors" href="#care">Care</a>
+              <a className="text-[color:var(--muted)] hover:text-[color:var(--foreground)] transition-colors" href="#newsletter">Updates</a>
             </nav>
             <div className="flex items-center gap-3">
               <ThemeToggle />
-              <a className="btn btn-primary" href="#newsletter" style={{padding:"0.7rem 1rem", borderRadius:18}}>
-                <span className="dot" /> Join List
+              <a
+                className="inline-flex items-center gap-2 rounded-[18px] px-4 py-[0.7rem] font-semibold text-white border border-[color:var(--line-color)] shadow-[0_2px_10px_-2px_hsl(var(--accent-rgb)/0.55)] bg-[linear-gradient(92deg,var(--accent),var(--accent-2))] hover:shadow-[0_4px_20px_-4px_hsl(var(--accent-rgb)/0.7)] transition"
+                href="#newsletter"
+              >
+                <span className="inline-block w-2 h-2 rounded-full bg-[var(--accent)] shadow-[0_0_0_6px_hsl(var(--accent-rgb)/0.18)]" />
+                Join List
               </a>
             </div>
           </div>
         </header>
+
         <main id="main">{children}</main>
-        <footer className="footer">
-          <div className="container" role="contentinfo">
-            <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:'1rem'}}>
+        <footer className="border-t border-[color:var(--line-color)] mt-16 py-8 text-[color:var(--muted)]">
+          <div className="max-w-6xl mx-auto px-6" role="contentinfo">
+            <div className="flex justify-between items-center flex-wrap gap-4">
               <p>© {new Date().getFullYear()} Aama Ko Nana. All rights reserved.</p>
-              <div style={{display:'flex',gap:'1rem'}}>
-                <a href="#" aria-label="Instagram">Instagram</a>
-                <a href="#" aria-label="Facebook">Facebook</a>
-                <a href="#" aria-label="X">X</a>
+              <div className="flex gap-4">
+                <a className="opacity-70 hover:opacity-100 transition" href="#" aria-label="Instagram">Instagram</a>
+                <a className="opacity-70 hover:opacity-100 transition" href="#" aria-label="Facebook">Facebook</a>
+                <a className="opacity-70 hover:opacity-100 transition" href="#" aria-label="X">X</a>
               </div>
             </div>
           </div>
