@@ -24,6 +24,10 @@
     radial-gradient(circle at 80% 70%, hsl(200 95% 55% / 0.2), transparent 60%);
 }
 
+.font-playfair {
+  font-family: var(--font-playfair);
+}
+
 .text-soft { color: var(--soft); }
 .text-muted { color: var(--muted); }
 
@@ -305,7 +309,7 @@ html[data-theme="dark"] {
   width: 100%;
   opacity: 0;
   transform: translateX(32px) scale(0.98);
-  transition: opacity 500ms ease, transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: opacity 1500ms ease, transform 2000ms cubic-bezier(0.34, 1.56, 0.64, 1);
   will-change: transform, opacity;
   pointer-events: none;
 }

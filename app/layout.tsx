@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import ThemeToggle from "../components/ThemeToggle";
 
@@ -11,6 +11,12 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -57,9 +63,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full scroll-smooth" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-full bg-[var(--background)] text-[color:var(--foreground)] selection:bg-[var(--foreground)] selection:text-[var(--background)]`}
+        className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} antialiased min-h-full bg-[var(--background)] text-[color:var(--foreground)] selection:bg-[var(--foreground)] selection:text-[var(--background)]`}
       >
-        <header className="bg-black text-center text-white py-2 px-2 top-0 z-50 bg-[rgba(201,164,107,0.18)]  backdrop-blur-sm backdrop-saturate-50 border-b border-[color:var(--line-color)] ">
+        <header className="bg-black text-center text-white py-2 px-2 top-0 z-50 bg-[rgba(201,164,107,0.18)]  backdrop-blur-sm backdrop-saturate-50 border-b border-[color:var(--line-color)] font-playfair">
           Winter Sale is Live! Up to 30% off on selected items. <a href="#newborns" className="underline font-semibold">Shop Now</a>
           </header>
 
@@ -67,7 +73,7 @@ export default function RootLayout({
           <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-2 font-semibold tracking-tight">
               <span className="inline-block w-3 h-3 rounded-full bg-[var(--accent)] shadow-[0_0_0_6px_hsl(var(--accent-rgb)/0.2)]" />
-              <span className="text-lg text-[color:var(--foreground)]">Aama Ko Nana</span>
+              <span className="text-lg font-playfair text-[color:var(--foreground)]">Aama Ko Nana</span>
             </div>
             <nav className="hidden md:flex items-center gap-5" aria-label="Primary">
               <a className="text-[color:var(--muted)] hover:text-[color:var(--foreground)] transition-colors" href="#story">Story</a>

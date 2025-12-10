@@ -39,10 +39,23 @@ export default function HeroCarousel() {
 
   useEffect(() => {
     const advance = () => setIndex((i) => (i + 1) % slides.length);
+    
     if (!isHovering) {
-      timerRef.current = window.setInterval(advance, 5500);
+      timerRef.current = window.setInterval(advance, 2500);
+    } else {
+      // Clear interval when hovering
+      if (timerRef.current) {
+        window.clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
     }
-    return () => { if (timerRef.current) window.clearInterval(timerRef.current); };
+    
+    return () => { 
+      if (timerRef.current) {
+        window.clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
+    };
   }, [isHovering]);
 
   useEffect(() => {
@@ -50,13 +63,11 @@ export default function HeroCarousel() {
     const track = trackRef.current;
     if (active && track) {
       track.style.height = `${active.offsetHeight}px`;
-      track.style.transition = "height 400ms ease";
     }
   }, [index]);
 
   const go = (i: number) => {
     setIndex(((i % slides.length) + slides.length) % slides.length);
-    if (timerRef.current) { window.clearInterval(timerRef.current); timerRef.current = null; }
   };
 
   const prev = () => go(index - 1);
@@ -91,20 +102,20 @@ export default function HeroCarousel() {
         <div className="absolute -top-24 -left-24 h-[38rem] w-[38rem] rounded-full blur-[96px] bg-[color:var(--foreground)/0.08]" />
         <div className="absolute -bottom-24 -right-24 h-[36rem] w-[36rem] rounded-full blur-[96px] bg-[color:var(--soft)/0.08]" />
       </div>
-      <div className="mx-auto max-w-7xl relative h-[90vh] flex flex-col">
+      <div className="mx-auto max-w-7xl relative h- flex flex-col" 
+        onMouseEnter={() => setIsHovering(true)}
+        onMouseLeave={() => setIsHovering(false)}
+      >
         <div
-          className="carousel-track flex-1"
+          className="carousel-track flex-1 min-h-[75vh]"
           ref={trackRef}
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
-          onMouseEnter={() => setIsHovering(true)}
-          onMouseLeave={() => setIsHovering(false)}
-          onFocus={() => setIsHovering(true)}
-          onBlur={() => setIsHovering(false)}
           role="region"
           aria-label="Product carousel"
           aria-roledescription="carousel"
+          style={{ transition: "height 1s ease" }}
         >
           {slides.map((s, i) => (
             <div
@@ -153,12 +164,12 @@ export default function HeroCarousel() {
                       <div className="mt-6 flex items-center gap-3">
                         <button
                           onClick={() => go(i + 1)}
-                          className="px-5 py-2.5 rounded-full bg-[color:var(--foreground)] text-[color:var(--background)] text-sm tracking-wide hover:opacity-95"
+                          className="px-5 py-2.5 hover:scale-105 hover:font-bold rounded-full bg-[color:var(--foreground)] text-[color:var(--background)] text-sm tracking-wide hover:opacity-95"
                         >
                           Shop New In
                         </button>
                         <button
-                          className="px-5 py-2.5 rounded-full border border-[color:var(--line-color)] text-[color:var(--foreground)] text-sm tracking-wide hover:bg-[color:var(--foreground)/0.06]"
+                          className="px-5 py-2.5 hover:scale-105 hover:font-bold rounded-full border border-[color:var(--line-color)] text-[color:var(--foreground)] text-sm tracking-wide hover:bg-[color:var(--foreground)/0.06]"
                         >
                           View Lookbook
                         </button>
@@ -185,12 +196,12 @@ export default function HeroCarousel() {
                       <div className="mt-6 flex items-center gap-3">
                         <button
                           onClick={() => go(i + 1)}
-                          className="px-5 py-2.5 rounded-full bg-[color:var(--foreground)] text-[color:var(--background)] text-sm tracking-wide hover:opacity-95"
+                          className="px-5 py-2.5 hover:font-bold hover:scale-105 rounded-full bg-[color:var(--foreground)] text-[color:var(--background)] text-sm tracking-wide hover:opacity-95"
                         >
                           Explore Collection
                         </button>
                         <button
-                          className="px-5 py-2.5 rounded-full border border-[color:var(--line-color)] text-[color:var(--foreground)] text-sm tracking-wide hover:bg-[color:var(--foreground)/0.06]"
+                          className="px-5 py-2.5 hover:font-bold hover:scale-105 rounded-full border border-[color:var(--line-color)] text-[color:var(--foreground)] text-sm tracking-wide hover:bg-[color:var(--foreground)/0.06]"
                         >
                           Sustainability
                         </button>
