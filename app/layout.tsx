@@ -59,8 +59,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-full bg-[var(--background)] text-[color:var(--foreground)] selection:bg-[var(--foreground)] selection:text-[var(--background)]`}
       >
+        <header className="bg-black text-center text-white py-2 px-2 top-0 z-50 bg-[rgba(201,164,107,0.18)]  backdrop-blur-sm backdrop-saturate-50 border-b border-[color:var(--line-color)] ">
+          Winter Sale is Live! Up to 30% off on selected items. <a href="#newborns" className="underline font-semibold">Shop Now</a>
+          </header>
 
-        <header className="sticky top-0 z-50 bg-[rgba(201,164,107,0.18)]  backdrop-blur-sm backdrop-saturate-50 border-b border-[color:var(--line-color)] ">
+        <header className="sticky top-0 z-50 bg-[rgba(201,164,107,0.18)]  backdrop-blur-3xl backdrop-saturate-50 border-b border-[color:var(--line-color)] ">
           <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-2 font-semibold tracking-tight">
               <span className="inline-block w-3 h-3 rounded-full bg-[var(--accent)] shadow-[0_0_0_6px_hsl(var(--accent-rgb)/0.2)]" />
@@ -74,13 +77,13 @@ export default function RootLayout({
             </nav>
             <div className="flex items-center gap-3">
               <ThemeToggle />
-              <a
+              {/* <a
                 className="inline-flex items-center gap-2 rounded-[18px] px-4 py-[0.7rem] font-semibold text-white border border-[color:var(--line-color)] shadow-[0_2px_10px_-2px_hsl(var(--accent-rgb)/0.55)] bg-[linear-gradient(92deg,var(--accent),var(--accent-2))] hover:shadow-[0_4px_20px_-4px_hsl(var(--accent-rgb)/0.7)] transition"
                 href="#newsletter"
               >
                 <span className="inline-block w-2 h-2 rounded-full bg-[var(--accent)] shadow-[0_0_0_6px_hsl(var(--accent-rgb)/0.18)]" />
                 Join List
-              </a>
+              </a> */}
             </div>
           </div>
         </header>

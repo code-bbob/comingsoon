@@ -55,7 +55,7 @@ export default function HeroCarousel() {
   }, [index]);
 
   const go = (i: number) => {
-    setIndex(i % slides.length);
+    setIndex(((i % slides.length) + slides.length) % slides.length);
     if (timerRef.current) { window.clearInterval(timerRef.current); timerRef.current = null; }
   };
 
@@ -220,30 +220,48 @@ export default function HeroCarousel() {
           ))}
         </div>
 
-        {/* Controls + premium pager - Glassy */}
-        <div className="absolute left-0 right-0 bottom-8 flex items-center justify-center z-10 pointer-events-none">
-          <div className="flex items-center gap-6 px-6 py-4 rounded-full border border-[color:var(--line-color)] bg-white/10 backdrop-blur shadow-2xl" role="toolbar" aria-label="Carousel controls" style={{pointerEvents: 'auto', WebkitBackdropFilter: 'blur(16px) saturate(120%)'}}>
-            <button
-              aria-label="Previous slide"
-              onClick={prev}
-              onKeyDown={onKeyDown}
-            //   className="h-4 w-4 grid place-items-center rounded-full bg-gradient-to-br from-[color:var(--foreground)/0.15] to-[color:var(--foreground)/0.08] border border-[color:var(--line-color)] text-[color:var(--foreground)] hover:from-[color:var(--foreground)/0.25] hover:to-[color:var(--foreground)/0.15] transition-all cursor-pointer active:scale-95 shadow-lg hover:shadow-xl font-bold text-lg"
-              tabIndex={1}
-            >
-              ‹
-            </button>
-        
-            <button
-              aria-label="Next slide"
-              onClick={next}
-              onKeyDown={onKeyDown}
-            //   className="h-4 w-4 grid place-items-center rounded-full bg-gradient-to-br from-[color:var(--foreground)/0.15] to-[color:var(--foreground)/0.08] border border-[color:var(--line-color)] text-[color:var(--foreground)] hover:from-[color:var(--foreground)/0.25] hover:to-[color:var(--foreground)/0.15] transition-all cursor-pointer active:scale-95 shadow-lg hover:shadow-xl font-bold text-lg"
-              tabIndex={0}
-            >
-              ›
-            </button>
+        {/* Left Control Button */}
+        <button
+          aria-label="Previous slide"
+          onClick={prev}
+          onKeyDown={onKeyDown}
+          className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-10 h-12 w-12 md:h-14 md:w-14 grid place-items-center rounded-full bg-white/15 backdrop-blur border border-white/20 text-[color:var(--foreground)] hover:bg-white/25 transition-all cursor-pointer active:scale-95 shadow-xl hover:shadow-2xl font-bold text-2xl"
+          tabIndex={0}
+          style={{WebkitBackdropFilter: 'blur(16px) saturate(120%)'}}
+        >
+          ‹
+        </button>
+
+        {/* Center Pager Dots */}
+        {/* <div className="absolute left-0 bottom-8 flex items-center justify-center z-10 pointer-events-none">
+          <div className="flex items-center gap-2 px-4 py-3 rounded-full border border-white/20 bg-white/15 backdrop-blur shadow-2xl" role="toolbar" aria-label="Carousel pager" style={{pointerEvents: 'auto', WebkitBackdropFilter: 'blur(16px) saturate(120%)'}}>
+            {[...slides.keys()].map((i) => (
+              <button
+                key={i}
+                aria-label={`Go to slide ${i + 1}`}
+                onClick={() => go(i)}
+                className={`rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[rgba(201,164,107,0.6)] cursor-pointer ${
+                  index === i
+                    ? "w-8 h-2.5 bg-[color:var(--foreground)]"
+                    : "w-2.5 h-2.5 bg-[color:var(--foreground)/0.35] hover:bg-[color:var(--foreground)/0.55]"
+                }`}
+                tabIndex={0}
+              />
+            ))}
           </div>
-        </div>
+        </div> */}
+
+        {/* Right Control Button */}
+        <button
+          aria-label="Next slide"
+          onClick={next}
+          onKeyDown={onKeyDown}
+          className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-10 h-12 w-12 md:h-14 md:w-14 grid place-items-center rounded-full bg-white/15 backdrop-blur border border-white/20 text-[color:var(--foreground)] hover:bg-white/25 transition-all cursor-pointer active:scale-95 shadow-xl hover:shadow-2xl font-bold text-2xl"
+          tabIndex={0}
+          style={{WebkitBackdropFilter: 'blur(16px) saturate(120%)'}}
+        >
+          ›
+        </button>
 
         {/* Brand marquee for premium feel */}
         <div className="px-6 py-8 flex items-center justify-center gap-8 opacity-70">
