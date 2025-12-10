@@ -39,7 +39,7 @@ export default function HeroCarousel() {
 
   useEffect(() => {
     const advance = () => setIndex((i) => (i + 1) % slides.length);
-    
+
     if (!isHovering) {
       timerRef.current = window.setInterval(advance, 2500);
     } else {
@@ -49,8 +49,8 @@ export default function HeroCarousel() {
         timerRef.current = null;
       }
     }
-    
-    return () => { 
+
+    return () => {
       if (timerRef.current) {
         window.clearInterval(timerRef.current);
         timerRef.current = null;
@@ -102,7 +102,8 @@ export default function HeroCarousel() {
         <div className="absolute -top-24 -left-24 h-[38rem] w-[38rem] rounded-full blur-[96px] bg-[color:var(--foreground)/0.08]" />
         <div className="absolute -bottom-24 -right-24 h-[36rem] w-[36rem] rounded-full blur-[96px] bg-[color:var(--soft)/0.08]" />
       </div>
-      <div className="mx-auto max-w-7xl relative h- flex flex-col" 
+      <div
+        className="mx-auto max-w-7xl relative h- flex flex-col"
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
@@ -120,26 +121,34 @@ export default function HeroCarousel() {
           {slides.map((s, i) => (
             <div
               key={s.title}
-              ref={(el) => { slideRefs.current[i] = el; }}
-              className={`carousel-slide ${index === i ? "is-active" : "is-next"}`}
+              ref={(el) => {
+                slideRefs.current[i] = el;
+              }}
+              className={`carousel-slide ${
+                index === i ? "is-active" : "is-next"
+              }`}
               role="group"
               aria-roledescription="slide"
               aria-label={`${i + 1} of ${slides.length}`}
             >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center px-4 md:px-8 py-12 md:py-20">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center px-4 md:px-8 ">
                 {s.reverse ? (
                   <>
-                    <div className="group rounded-3xl border border-[color:var(--line-color)] mt-10 order-last md:order-first overflow-hidden bg-gradient-to-br from-[color:var(--foreground)/0.04] to-transparent backdrop-blur-sm shadow-xl hover:shadow-2xl transition-shadow duration-500">
+                    <div className="group rounded-3xl border border-[color:var(--line-color)] mt-10 order-last md:order-first overflow-hidden bg-gradient-to-br from-[color:var(--foreground)/0.04] to-transparent backdrop-blur-sm shadow-md transition-shadow duration-500">
                       <div className="relative">
                         <Image
                           src={s.imageSrc}
                           alt={s.imageAlt}
-                          width={1200}
+                          width={800}
                           height={800}
-                          className="w-full h-[280px] md:h-[420px] object-cover will-change-transform"
+                          className="w-full h-[280px] md:h-[400px] object-cover will-change-transform"
                         />
                         {/* Ken Burns subtle zoom when active */}
-                        <div className={`absolute inset-0 transition-transform duration-[3000ms] ${index === i ? "scale-105" : "scale-100"}`} />
+                        <div
+                          className={`absolute inset-0 transition-transform duration-[3000ms] ${
+                            index === i ? "scale-105" : "scale-100"
+                          }`}
+                        />
                         {/* Premium overlay with metallic sheen */}
                         <div className="absolute inset-0 bg-gradient-to-tr from-black/10 via-transparent to-white/5 mix-blend-soft-light" />
                         {/* Glossy light reflection */}
@@ -168,9 +177,7 @@ export default function HeroCarousel() {
                         >
                           Shop New In
                         </button>
-                        <button
-                          className="px-5 py-2.5 hover:scale-105 hover:font-bold rounded-full border border-[color:var(--line-color)] text-[color:var(--foreground)] text-sm tracking-wide hover:bg-[color:var(--foreground)/0.06]"
-                        >
+                        <button className="px-5 py-2.5 hover:scale-105 hover:font-bold rounded-full border border-[color:var(--line-color)] text-[color:var(--foreground)] text-sm tracking-wide hover:bg-[color:var(--foreground)/0.06]">
                           View Lookbook
                         </button>
                       </div>
@@ -200,9 +207,7 @@ export default function HeroCarousel() {
                         >
                           Explore Collection
                         </button>
-                        <button
-                          className="px-5 py-2.5 hover:font-bold hover:scale-105 rounded-full border border-[color:var(--line-color)] text-[color:var(--foreground)] text-sm tracking-wide hover:bg-[color:var(--foreground)/0.06]"
-                        >
+                        <button className="px-5 py-2.5 hover:font-bold hover:scale-105 rounded-full border border-[color:var(--line-color)] text-[color:var(--foreground)] text-sm tracking-wide hover:bg-[color:var(--foreground)/0.06]">
                           Sustainability
                         </button>
                       </div>
@@ -217,7 +222,11 @@ export default function HeroCarousel() {
                           className="w-full h-[280px] md:h-[420px] object-cover will-change-transform"
                         />
                         {/* Ken Burns subtle zoom when active */}
-                        <div className={`absolute inset-0 transition-transform duration-[3000ms] ${index === i ? "scale-105" : "scale-100"}`} />
+                        <div
+                          className={`absolute inset-0 transition-transform duration-[3000ms] ${
+                            index === i ? "scale-105" : "scale-100"
+                          }`}
+                        />
                         {/* Premium overlay with metallic sheen */}
                         <div className="absolute inset-0 bg-gradient-to-tr from-black/10 via-transparent to-white/5 mix-blend-soft-light" />
                         {/* Glossy light reflection */}
@@ -238,7 +247,7 @@ export default function HeroCarousel() {
           onKeyDown={onKeyDown}
           className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-10 h-12 w-12 md:h-14 md:w-14 grid place-items-center rounded-full bg-white/15 backdrop-blur border border-white/20 text-[color:var(--foreground)] hover:bg-white/25 transition-all cursor-pointer active:scale-95 shadow-xl hover:shadow-2xl font-bold text-2xl"
           tabIndex={0}
-          style={{WebkitBackdropFilter: 'blur(16px) saturate(120%)'}}
+          style={{ WebkitBackdropFilter: "blur(16px) saturate(120%)" }}
         >
           ‹
         </button>
@@ -269,17 +278,25 @@ export default function HeroCarousel() {
           onKeyDown={onKeyDown}
           className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-10 h-12 w-12 md:h-14 md:w-14 grid place-items-center rounded-full bg-white/15 backdrop-blur border border-white/20 text-[color:var(--foreground)] hover:bg-white/25 transition-all cursor-pointer active:scale-95 shadow-xl hover:shadow-2xl font-bold text-2xl"
           tabIndex={0}
-          style={{WebkitBackdropFilter: 'blur(16px) saturate(120%)'}}
+          style={{ WebkitBackdropFilter: "blur(16px) saturate(120%)" }}
         >
           ›
         </button>
 
         {/* Brand marquee for premium feel */}
         <div className="px-6 py-8 flex items-center justify-center gap-8 opacity-70">
-          <span className="text-sm tracking-[0.25em] text-[color:var(--soft)]">ORGANIC</span>
-          <span className="text-sm tracking-[0.25em] text-[color:var(--soft)]">SUSTAINABLE</span>
-          <span className="text-sm tracking-[0.25em] text-[color:var(--soft)]">HANDMADE</span>
-          <span className="text-sm tracking-[0.25em] text-[color:var(--soft)]">ETHICAL</span>
+          <span className="text-sm tracking-[0.25em] text-[color:var(--soft)]">
+            ORGANIC
+          </span>
+          <span className="text-sm tracking-[0.25em] text-[color:var(--soft)]">
+            SUSTAINABLE
+          </span>
+          <span className="text-sm tracking-[0.25em] text-[color:var(--soft)]">
+            HANDMADE
+          </span>
+          <span className="text-sm tracking-[0.25em] text-[color:var(--soft)]">
+            ETHICAL
+          </span>
         </div>
       </div>
     </section>
